@@ -1,0 +1,22 @@
+{
+  "SourceUser": {
+    "Id": "555",
+    "Domain": "joeykim.tv",
+    "Login": "missselena",
+    "Roles": "Member,Model",
+    "IPAddress": "2.2.2.2",
+    "UserScore":100
+  },
+  "Body":
+  {
+    "IsPing": false,
+    "Name": "Selena",
+    "Description": "joeys friend",
+    "Website": "https:xxx",
+    "Facebook": "faceme",
+    "Twitter": "tweet",
+    "Instagram": "ig",
+    "Snapchat": "shapme"
+  }
+
+}

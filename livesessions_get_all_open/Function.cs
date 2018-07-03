@@ -9,7 +9,7 @@ using Amazon.Lambda.Core;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace models_products_post
+namespace livesessions_get_all_open
 {
     public class Function
     {
@@ -29,25 +29,15 @@ namespace models_products_post
 
             try
             {
-
-                //validate require role
-                if (!input.SourceUser.HasRole("Model"))
-                    return new Response { StatusCode = 401, Message = "Access denied, requires Model role" };
-
-
-
-                var modelProduct = new ModelProduct
-                {
-                    ModelId = input.Body.ModelId,
-                    ProductId = input.Body.ProductId
-                };
-                modelProduct.Save(dba.Connection);
+                var list = LiveSession.LoadOpenAll(dba.Connection);
                 
-
+                
                 var r = new Response()
                 {
                     StatusCode = 200,
-                    Message = "ok"
+                    Message = "ok",
+                    Items = list.ToArray(),
+                    Count = list.Count
                 };
                 return r;
 

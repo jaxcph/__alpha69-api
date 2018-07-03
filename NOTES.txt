@@ -1,0 +1,9 @@
+
+
+-----------------------------------------------
+admin RDS mysql over phpmyadmin server on EC2
+----------------------------------------------
+http://ec2-18-185-131-97.eu-central-1.compute.amazonaws.com/phpmyadmin/
+server: alpha69.cfuzrlbo4jgs.eu-central-1.rds.amazonaws.com
+usr: dbadmin
+pwd: fPA4Y9iZK15Tn1kw

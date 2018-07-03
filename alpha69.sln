@@ -11,11 +11,34 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "alpha69.common", "alpha69.c
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json test", "json test", "{1E7CC67C-A888-46BA-A595-1146044CF245}"
 	ProjectSection(SolutionItems) = preProject
-		models_post\models_post.json = models_post\models_post.json
-		users_purchase\users_purchase.json = users_purchase\users_purchase.json
+		live_session_post.json = live_session_post.json
+		livesessions_delete.json = livesessions_delete.json
+		models_post.json = models_post.json
+		models_products_delete.json = models_products_delete.json
+		models_products_post.json = models_products_post.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "models_products_post", "models_products_post\models_products_post.csproj", "{565C86B9-392F-4F41-8062-5113D0AD4748}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F08323C8-92BE-4969-AEC1-3509FE3B0B05}"
+	ProjectSection(SolutionItems) = preProject
+		alpha69.sql = alpha69.sql
+		NOTES.txt = NOTES.txt
+		smartami_phpmyadmin2.pem = smartami_phpmyadmin2.pem
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "models_products_delete", "model_products_delete\models_products_delete.csproj", "{C7364C82-D889-40F2-88E9-611848D67644}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api gateway body mappings", "api gateway body mappings", "{16A9A9F3-08BE-4A44-84A9-4F4543D78300}"
+	ProjectSection(SolutionItems) = preProject
+		standard.json = standard.json
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "livesessions_post", "livesessions_post\livesessions_post.csproj", "{A47BA750-DFDD-40D0-8FEB-12165EC954EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "livesessions_delete", "livesessions_delete\livesessions_delete.csproj", "{A03AC71F-9FEB-43BD-A01E-94F8EE47B028}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "livesessions_get_all_open", "livesessions_get_all_open\livesessions_get_all_open.csproj", "{79B7FE4B-C679-465C-B88B-8E21FF5B2F2A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +62,22 @@ Global
 		{565C86B9-392F-4F41-8062-5113D0AD4748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{565C86B9-392F-4F41-8062-5113D0AD4748}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{565C86B9-392F-4F41-8062-5113D0AD4748}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7364C82-D889-40F2-88E9-611848D67644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7364C82-D889-40F2-88E9-611848D67644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7364C82-D889-40F2-88E9-611848D67644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7364C82-D889-40F2-88E9-611848D67644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A47BA750-DFDD-40D0-8FEB-12165EC954EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A47BA750-DFDD-40D0-8FEB-12165EC954EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A47BA750-DFDD-40D0-8FEB-12165EC954EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A47BA750-DFDD-40D0-8FEB-12165EC954EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A03AC71F-9FEB-43BD-A01E-94F8EE47B028}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A03AC71F-9FEB-43BD-A01E-94F8EE47B028}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A03AC71F-9FEB-43BD-A01E-94F8EE47B028}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A03AC71F-9FEB-43BD-A01E-94F8EE47B028}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79B7FE4B-C679-465C-B88B-8E21FF5B2F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79B7FE4B-C679-465C-B88B-8E21FF5B2F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79B7FE4B-C679-465C-B88B-8E21FF5B2F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79B7FE4B-C679-465C-B88B-8E21FF5B2F2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

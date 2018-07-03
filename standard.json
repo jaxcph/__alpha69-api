@@ -1,0 +1,11 @@
+{
+
+  "SourceUser": {
+    "Id": "$util.escapeJavaScript($input.params().header.get('userId'))",
+    "Domain": "$util.escapeJavaScript($input.params().header.get('userDomain'))",
+    "Login": "$util.escapeJavaScript($input.params().header.get('userLogin'))",
+    "Roles": "$util.escapeJavaScript($input.params().header.get('userRoles'))",
+    "IPAddress": "$util.escapeJavaScript($input.params().header.get('X-Forwarded-For'))"
+  },
+  "Body": $input.json('$')
+}

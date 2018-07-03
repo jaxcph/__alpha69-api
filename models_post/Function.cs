@@ -20,12 +20,18 @@ namespace models_post
         /// <returns></returns>
         public Response FunctionHandler(Request input, ILambdaContext context)
         {
+            var dba = new DBAccess();
+
             if (input.Body.IsPing)
-                return new Response { StatusCode = 200,Message="ok, ping"}; 
-           
+                return new Response {StatusCode = 200, Message = dba.Test()};
+            
             try
             {
-                var dba = new DBAccess();
+
+                //validate require role
+                if (!input.SourceUser.HasRole("Model"))
+                    return new Response { StatusCode = 401, Message = "Access denied, requires Model role" };   
+
 
                 //get or create user
                 var user = User.LoadBySourceUser(input.SourceUser, dba.Connection);

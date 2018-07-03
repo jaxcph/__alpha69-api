@@ -61,6 +61,8 @@ namespace alpha69.common
             try
             {
                 this.Connection.Open();
+                var cmd=new MySqlCommand("SELECT now()",this.Connection);
+                cmd.ExecuteNonQuery();
                 this.Connection.Close();
                 return "ok";
             }

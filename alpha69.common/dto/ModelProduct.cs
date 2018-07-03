@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace alpha69.common.dto
@@ -17,7 +18,7 @@ namespace alpha69.common.dto
        
         public ModelProduct()
         {
-
+            
         }
 
         public ModelProduct(DataRow row)
@@ -26,49 +27,8 @@ namespace alpha69.common.dto
             ProductId = Convert.ToInt32(row["product_id"]);
             this._createdAt = Convert.ToDateTime(row["created_at"]);
           
-        } 
-
-        
-       /* public static ModelProduct Load(int id, MySqlConnection conn)
-        {
-            var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE id={id}", conn);
-            var ds = new DataSet("models");
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
-            else
-                return null;
         }
 
-        public static ModelProduct LoadByUser(int userId, MySqlConnection conn)
-        {
-            var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE user_id={userId}", conn);
-            var ds = new DataSet("models");
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
-            else
-                return null;
-        }
-
-
-        public static ModelProduct LoadByName(string name, MySqlConnection conn)
-        {
-            var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE name=@name", conn);
-            da.SelectCommand.Parameters.Add("@name",MySqlDbType.VarChar);
-            da.SelectCommand.Parameters[0].Value = name;
-
-            var ds = new DataSet("models");
-            da.Fill(ds);
-
-            if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
-            else
-                return null;
-        }
-        */
 
         public void Save(MySqlConnection conn)
         {

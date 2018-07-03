@@ -29,41 +29,44 @@ namespace users_purchase
         /// <param name="input"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public Response FunctionHandler(Request request, ILambdaContext context)
+        public Response FunctionHandler(Request input, ILambdaContext context)
         {
+            var dba = new DBAccess();
+            if (input.Body.IsPing)
+                return new Response { StatusCode = 200, Message = dba.Test() };
 
-            if (request.Body.IsPing)
-                return new Response { StatusCode = 200,Message="ok, ping" };
-          
             try
             {
 
-              var dba = new DBAccess();
+                //validate require role
+                if (!input.SourceUser.HasRole("Member"))
+                    return new Response { StatusCode = 401, Message = "Access denied, requires Model role" };
+
 
                 //get or create user
-                var user=User.LoadBySourceUser(request.SourceUser,dba.Connection);
+                var user =User.LoadBySourceUser(input.SourceUser,dba.Connection);
                 if (user == null) //does not exist
                 {
                     user = new User()
                     {
-                        SourceDomain = request.SourceUser.Domain,
-                        SourceUserId = request.SourceUser.Id,
-                        Login = request.SourceUser.Login
+                        SourceDomain = input.SourceUser.Domain,
+                        SourceUserId = input.SourceUser.Id,
+                        Login = input.SourceUser.Login
                     };
                     user.Save(dba.Connection);
                 }
 
          
                 //get or create wallet
-                var wallet = Wallet.LoadByUserProduxt(user.Id,request.Body.ProductId, dba.Connection);
+                var wallet = Wallet.LoadByUserProduxt(user.Id,input.Body.ProductId, dba.Connection);
                 if (wallet == null)
                 {
                     wallet = new Wallet()
                     {
                         UserId =user.Id,
-                        Balance = request.Body.Amount,
-                        ProductId = request.Body.ProductId,
-                        TotalPurchased = request.Body.Amount,
+                        Balance = input.Body.Amount,
+                        ProductId = input.Body.ProductId,
+                        TotalPurchased = input.Body.Amount,
                         TotalTipped = 0
                     };
                     wallet.Save(dba.Connection);
@@ -71,18 +74,18 @@ namespace users_purchase
                 else
                 {
                     //update wallet
-                    wallet.Balance+=request.Body.Amount;
-                    wallet.TotalPurchased += request.Body.Amount;
+                    wallet.Balance+=input.Body.Amount;
+                    wallet.TotalPurchased += input.Body.Amount;
                     wallet.Update(dba.Connection);
                 }
 
                 //register purchase transaction
                 var purchase = new Purchase(user.Id, wallet.Id)
                 {
-                    Amount = request.Body.Amount,
-                    Note = request.Body.Note,
-                    PaymentTransactionId = request.Body.PaymentTransactionId,
-                    PaymentProcessor = request.Body.PaymentProcessor
+                    Amount = input.Body.Amount,
+                    Note = input.Body.Note,
+                    PaymentTransactionId = input.Body.PaymentTransactionId,
+                    PaymentProcessor = input.Body.PaymentProcessor
                 };
                 purchase.Save(dba.Connection);
 

@@ -25,6 +25,14 @@ namespace alpha69.common.dto
         public string Snapchat { get; set; }
 
 
+        protected Product[] _products=null;
+        public Product[] Products
+        {
+            get { return _products; }
+        }
+
+
+
         public Model()
         {
 
@@ -45,14 +53,18 @@ namespace alpha69.common.dto
         } 
 
         
-        public static Model Load(int id, MySqlConnection conn)
+        public static Model Load(int id, bool includeProducts,MySqlConnection conn)
         {
             var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE id={id}", conn);
             var ds = new DataSet("models");
             da.Fill(ds);
 
             if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
+            {
+                var item=new Model(ds.Tables[0].Rows[0]);
+                item._products = Product.LoadForModel(id, conn).ToArray();
+                return item;
+            }
             else
                 return null;
         }

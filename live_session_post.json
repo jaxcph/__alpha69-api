@@ -1,0 +1,18 @@
+{
+  "SourceUser": {
+    "Id": "555",
+    "Domain": "joeykim.tv",
+    "Login": "missselena",
+    "Roles": "Member, Model",
+    "IPAddress": "2.2.2.2",
+    "UserScore": 100
+  },
+  "Body": {
+    "IsPing": false,
+    "Title": "Selena does Spain",
+    "Description": "joeys friend Selena plays on visit with joey",
+    "Tags": "tenniriff spain",
+    "RequiredUserScore":1000
+  }
+
+}
