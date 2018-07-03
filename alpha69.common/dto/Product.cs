@@ -17,7 +17,9 @@ namespace alpha69.common.dto
 
         public string DisplayName { get; set; }
         public string Description { get; set; }
-        
+        public bool AllowTipping { get; set; }
+        public bool AllowPayPerMinute { get; set; }
+
 
         public Product()
         {
@@ -30,6 +32,8 @@ namespace alpha69.common.dto
             this.DisplayName = row["shortname"] as String;
             this.Description = row["descr"] as String;
             this._createdAt = Convert.ToDateTime(row["created_at"]);
+            this.AllowTipping = Convert.ToBoolean(row["allow_tipping"]);
+            this.AllowPayPerMinute = Convert.ToBoolean(row["allow_ppm"]);
         }
 
         
@@ -40,7 +44,7 @@ namespace alpha69.common.dto
 
             var list = new List<Product>();
 
-            var da = new MySqlDataAdapter($"SELECT p.id,p.shortname,p.descr,p.created_at FROM products p, model_products mp WHERE (mp.model_id={modelId}) AND (mp.product_id=p.id) AND (p.active=1) ORDER BY id", conn);
+            var da = new MySqlDataAdapter($"SELECT p.id,p.shortname,p.descr,p.created_at,allow_tipping,allow_ppm FROM products p, model_products mp WHERE (mp.model_id={modelId}) AND (mp.product_id=p.id) AND (p.active=1) ORDER BY id", conn);
             var ds = new DataSet("products");
             da.Fill(ds);
 

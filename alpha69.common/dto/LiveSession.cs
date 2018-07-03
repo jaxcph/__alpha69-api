@@ -30,12 +30,20 @@ namespace alpha69.common.dto
 
         public bool Abandoned { get; set; }
 
+        public bool AllowPayPerMinute { get; set; }
+        public int PpmProductId { get; set; }
+        public double PpmAmount { get; set; }
+        public double PpmMinimumJoinAmount { get; set; }
+
+
         protected Model _hostModel;
         public Model HostModel
         {
             get { return _hostModel; }
         }
 
+
+        
 
         public LiveSession()
         {
@@ -63,7 +71,15 @@ namespace alpha69.common.dto
 
             this.Abandoned = Convert.ToBoolean(row["abandoned"]);
 
-            
+            if (!row.IsNull("ppm_product_id"))
+                this.PpmProductId = Convert.ToInt32(row["ppm_product_id"]);
+            else
+                this.PpmProductId = 0;
+
+            this.AllowPayPerMinute = Convert.ToBoolean(row["allow_ppm"]);
+
+            this.PpmAmount = Convert.ToDouble(row["ppm_amount"]);
+            this.PpmMinimumJoinAmount = Convert.ToDouble(row["ppm_min_join_amount"]);
         }
 
 
@@ -71,7 +87,7 @@ namespace alpha69.common.dto
         {
             var list = new List<LiveSession>();
 
-            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned FROM live_sessions WHERE (ended_at IS NULL) ORDER BY id DESC", conn);
+            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned,allow_ppm,ppm_product_id,ppm_amount,ppm_min_join_amount FROM live_sessions WHERE (ended_at IS NULL) ORDER BY id DESC", conn);
             var ds = new DataSet("live_sessions");
             da.Fill(ds);
 
@@ -93,7 +109,7 @@ namespace alpha69.common.dto
         public static List<LiveSession> LoadAllByModel(int modelId, MySqlConnection conn)
         {
             var list = new List<LiveSession>();
-            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned FROM live_sessions WHERE (host_model_id={modelId}) ORDER BY id DESC", conn);
+            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned, allow_ppm, ppm_product_id, ppm_amount, ppm_min_join_amount FROM live_sessions WHERE (host_model_id={modelId}) ORDER BY id DESC", conn);
             var ds = new DataSet("live_sessions");
             da.Fill(ds);
 
@@ -114,7 +130,7 @@ namespace alpha69.common.dto
 
         public static LiveSession LoadOpenById(int liveSessionId, MySqlConnection conn)
         {
-            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned FROM live_sessions WHERE id={liveSessionId}  AND (ended_at IS NULL)", conn);
+            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned, allow_ppm, ppm_product_id, ppm_amount, ppm_min_join_amount FROM live_sessions WHERE id={liveSessionId}  AND (ended_at IS NULL)", conn);
             var ds = new DataSet("live_sessions");
             da.Fill(ds);
 
@@ -127,7 +143,7 @@ namespace alpha69.common.dto
 
         public static LiveSession LoadOpenForModel(int modelId, MySqlConnection conn)
         {
-            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned FROM live_sessions WHERE (host_model_id={modelId}) AND (ended_at IS NULL) ORDER BY id DESC LIMIT 1", conn);
+            var da = new MySqlDataAdapter($"SELECT id,host_model_id,title,description,tags,req_user_score,ended_at,ended_rating,ended_remark,started_at,abandoned, allow_ppm, ppm_product_id, ppm_amount, ppm_min_join_amount FROM live_sessions WHERE (host_model_id={modelId}) AND (ended_at IS NULL) ORDER BY id DESC LIMIT 1", conn);
             var ds = new DataSet("live_sessions");
             da.Fill(ds);
 
@@ -155,7 +171,7 @@ namespace alpha69.common.dto
         {
             var closeCmd=new MySqlCommand($"UPDATE live_sessions SET ended_at=now(), ended_rating=NULL, ended_remark=NULL, abandoned=1 WHERE (host_model_id={HostModelId}) AND (ended_at IS NULL);COMMIT", conn);
 
-            var cmd = new MySqlCommand($"INSERT INTO live_sessions(host_model_id,title,description,req_user_score,tags,abandoned) VALUES ({HostModelId},@title,@description,{RequiredUserScore},@tags,0);COMMIT;SELECT LAST_INSERT_ID();", conn);
+            var cmd = new MySqlCommand($"INSERT INTO live_sessions(host_model_id,title,description,req_user_score,tags,abandoned, allow_ppm, ppm_product_id, ppm_amount, ppm_min_join_amount) VALUES ({HostModelId},@title,@description,{RequiredUserScore},@tags,0,{AllowPayPerMinute},{PpmProductId},{PpmAmount},{PpmMinimumJoinAmount});COMMIT;SELECT LAST_INSERT_ID();", conn);
             cmd.Parameters.Add("@title", MySqlDbType.VarChar);
             cmd.Parameters.Add("@description", MySqlDbType.VarChar);
             cmd.Parameters.Add("@tags", MySqlDbType.VarChar);

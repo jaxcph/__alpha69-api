@@ -52,8 +52,12 @@ namespace livesessions_post
                     Title = input.Body.Title,
                     Description = input.Body.Description,
                     RequiredUserScore = input.Body.RequiredUserScore,
-                    Tags = input.Body.Tags
-                };
+                    Tags = input.Body.Tags,
+                    AllowPayPerMinute=input.Body.AllowPayPerMinute,
+                    PpmProductId=input.Body.PpmProductId,
+                    PpmAmount=input.Body.PpmAmount,
+                    PpmMinimumJoinAmount=input.Body.PpmMinimumJoinAmount
+                 };
                 ls.Save(dba.Connection);
 
 
