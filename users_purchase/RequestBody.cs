@@ -9,6 +9,5 @@
         public string Note { get; set; }
         public string PaymentTransactionId { get; set; }
         public string PaymentProcessor { get; set; }
-
     }
 }

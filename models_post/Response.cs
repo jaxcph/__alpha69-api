@@ -2,17 +2,15 @@
 
 namespace models_post
 {
-    public class Response:ResponseBase        
+    public class Response : ResponseBase
     {
-
-        public ResponseBody Body { get; set; }
-
         public Response()
         {
             Message = "";
             Details = "";
         }
 
+        public ResponseBody Body { get; set; }
     }
 
     public class ResponseBody

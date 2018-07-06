@@ -1,5 +1,4 @@
 {
-
   "SourceUser": {
     "Id": "$util.escapeJavaScript($input.params().header.get('userId'))",
     "Domain": "$util.escapeJavaScript($input.params().header.get('userDomain'))",

@@ -1,13 +1,10 @@
-﻿
-using alpha69.common;
+﻿using alpha69.common;
 
 namespace models_post
 {
-    public class Request:RequestBase
+    public class Request : RequestBase
     {
-
         public RequestBody Body { get; set; }
-
     }
 
     public class RequestBody
@@ -20,7 +17,5 @@ namespace models_post
         public string Twitter { get; set; }
         public string Instagram { get; set; }
         public string Snapchat { get; set; }
-
     }
 }
-

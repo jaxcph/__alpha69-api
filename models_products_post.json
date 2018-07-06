@@ -1,16 +1,15 @@
 {
-  
-    "SourceUser": {
-      "Id": "555",
-      "Domain": "joeykim.tv",
-      "Login": "missselena",
-      "Roles": "Member, Model",
-      "IPAddress": "2.2.2.2",
-      "UserScore": 100
-    },
-    "Body": {
-      "IsPing": false,
-      "ModelId": 51,
-      "ProductId": 100
-    }
+  "SourceUser": {
+    "Id": "555",
+    "Domain": "joeykim.tv",
+    "Login": "missselena",
+    "Roles": "Member, Model",
+    "IPAddress": "2.2.2.2",
+    "UserScore": 100
+  },
+  "Body": {
+    "IsPing": false,
+    "ModelId": 51,
+    "ProductId": 100
   }
+}

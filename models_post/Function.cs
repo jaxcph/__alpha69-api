@@ -2,18 +2,18 @@ using System;
 using alpha69.common;
 using alpha69.common.dto;
 using Amazon.Lambda.Core;
+using Amazon.Lambda.Serialization.Json;
 
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+[assembly: LambdaSerializer(typeof(JsonSerializer))]
 
 namespace models_post
 {
     public class Function
     {
-        
         /// <summary>
-        /// A simple function that takes a string and does a ToUpper
+        ///     A simple function that takes a string and does a ToUpper
         /// </summary>
         /// <param name="input"></param>
         /// <param name="context"></param>
@@ -24,20 +24,19 @@ namespace models_post
 
             if (input.Body.IsPing)
                 return new Response {StatusCode = 200, Message = dba.Test()};
-            
+
             try
             {
-
                 //validate require role
                 if (!input.SourceUser.HasRole("Model"))
-                    return new Response { StatusCode = 401, Message = "Access denied, requires Model role" };   
+                    return new Response {StatusCode = 401, Message = "Access denied, requires Model role"};
 
 
                 //get or create user
                 var user = User.LoadBySourceUser(input.SourceUser, dba.Connection);
                 if (user == null) //does not exist
                 {
-                    user = new User()
+                    user = new User
                     {
                         SourceDomain = input.SourceUser.Domain,
                         SourceUserId = input.SourceUser.Id,
@@ -46,13 +45,13 @@ namespace models_post
                     user.Save(dba.Connection);
                 }
 
-                var modelExisting = Model.LoadByUser(user.Id,false, dba.Connection);
+                var modelExisting = Model.LoadByUser(user.Id, false, dba.Connection);
                 if (modelExisting != null)
-                    return new Response()
+                    return new Response
                     {
                         StatusCode = 409,
                         Message = "Already exists",
-                        Body = new ResponseBody()
+                        Body = new ResponseBody
                         {
                             ModelId = modelExisting.Id
                         }
@@ -71,18 +70,17 @@ namespace models_post
                 };
                 model.Save(dba.Connection);
 
-          
-                var r = new Response()
+
+                var r = new Response
                 {
                     StatusCode = 200,
                     Message = "ok",
-                    Body = new ResponseBody() { 
+                    Body = new ResponseBody
+                    {
                         ModelId = model.Id
                     }
                 };
                 return r;
-
-
             }
             catch (Exception e)
             {

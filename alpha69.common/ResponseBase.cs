@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace alpha69.common
 {
@@ -8,12 +7,6 @@ namespace alpha69.common
         public int StatusCode { get; set; }
         public string Message { get; set; }
         public string Details { get; set; }
-
- 
-        public ResponseBase()
-        {
-
-        }
 
         public void Set(int statusCode, string message)
         {
@@ -27,9 +20,6 @@ namespace alpha69.common
             StatusCode = statusCode;
             Message = e.Message;
             Details = e.ToString();
-     
         }
-
-
     }
 }

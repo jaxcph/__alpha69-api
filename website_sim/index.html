@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title></title>
     <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -9,26 +9,24 @@
         crossorigin="anonymous"></script>
 </head>
 <body>
-    
+
 
 <script>
-        (function worker() {
-            $.ajax(
-                {
-                    url: 'test.html', 
-                    success: function (data)
-                    {
-                        $('.result').html(data);
-                    },
-                    complete: function ()
-                    {
-                        // Schedule the next request when the current one's complete
-                        setTimeout(worker, 5000);
-                    }
-                });
+    (function worker() {
+        $.ajax(
+            {
+                url: 'test.html',
+                success: function(data) {
+                    $('.result').html(data);
+                },
+                complete: function() {
+                    // Schedule the next request when the current one's complete
+                    setTimeout(worker, 5000);
+                }
+            });
     })();
 
-        worker()
+    worker();
 
 
 </script>

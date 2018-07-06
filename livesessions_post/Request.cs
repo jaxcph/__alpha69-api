@@ -1,13 +1,10 @@
-﻿
-using alpha69.common;
+﻿using alpha69.common;
 
 namespace livesessions_post
 {
-    public class Request:RequestBase
+    public class Request : RequestBase
     {
-
         public RequestBody Body { get; set; }
-
     }
 
     public class RequestBody
@@ -26,4 +23,3 @@ namespace livesessions_post
         public double PpmMinimumJoinAmount { get; set; }
     }
 }
-

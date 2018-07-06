@@ -1,19 +1,16 @@
-﻿using System.Security.AccessControl;
-using alpha69.common;
+﻿using alpha69.common;
 
 namespace livesessions_post
 {
-    public class Response:ResponseBase        
+    public class Response : ResponseBase
     {
-
-        public ResponseBody Body { get; set; }
-
         public Response()
         {
             Message = "";
             Details = "";
         }
 
+        public ResponseBody Body { get; set; }
     }
 
     public class ResponseBody

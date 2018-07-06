@@ -1,69 +1,66 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-
- 
+﻿using System;
+using MySql.Data.MySqlClient;
 
 namespace alpha69.common
 {
     public class DBAccess
     {
-        private string DB_SERVER;
-        private int DB_PORT;
-        private string DB_USERNAME;
-        private string DB_PASSWORD;
-        private string DB_DATABASE;
-        private string DB_SSLMODE;
-
-      
-
         public MySqlConnection Connection;
+        private readonly string DB_DATABASE;
+        private readonly string DB_PASSWORD;
+        private readonly int DB_PORT;
+        private readonly string DB_SERVER;
+        private readonly string DB_SSLMODE;
+        private readonly string DB_USERNAME;
 
         public DBAccess()
         {
-            this.DB_SERVER = System.Environment.GetEnvironmentVariable("DB_SERVER");
-            this.DB_PORT = int.Parse(System.Environment.GetEnvironmentVariable("DB_PORT"));
-            this.DB_USERNAME = System.Environment.GetEnvironmentVariable("DB_USERNAME");
-            this.DB_PASSWORD = System.Environment.GetEnvironmentVariable("DB_PASSWORD");
-            this.DB_DATABASE = System.Environment.GetEnvironmentVariable("DB_DATABASE");
-            this.DB_SSLMODE = System.Environment.GetEnvironmentVariable("DB_SSLMODE");
-       
+            DB_SERVER = Environment.GetEnvironmentVariable("DB_SERVER");
+            DB_PORT = int.Parse(Environment.GetEnvironmentVariable("DB_PORT"));
+            DB_USERNAME = Environment.GetEnvironmentVariable("DB_USERNAME");
+            DB_PASSWORD = Environment.GetEnvironmentVariable("DB_PASSWORD");
+            DB_DATABASE = Environment.GetEnvironmentVariable("DB_DATABASE");
+            DB_SSLMODE = Environment.GetEnvironmentVariable("DB_SSLMODE");
 
-            this.Connection=new MySqlConnection(string.Format("server={0};uid={1};pwd={2};database={3};port={4};SslMode={5}",
-                this.DB_SERVER,
-                this.DB_USERNAME,
-                this.DB_PASSWORD,
-                this.DB_DATABASE,
-                this.DB_PORT,
-                this.DB_SSLMODE));
+
+            Connection = new MySqlConnection(string.Format(
+                "server={0};uid={1};pwd={2};database={3};port={4};SslMode={5}",
+                DB_SERVER,
+                DB_USERNAME,
+                DB_PASSWORD,
+                DB_DATABASE,
+                DB_PORT,
+                DB_SSLMODE));
         }
 
-        public DBAccess(string dbServer, string dbUsername, string dbPassword, string dbDatabase, int dbPort, string sslMode)
+        public DBAccess(string dbServer, string dbUsername, string dbPassword, string dbDatabase, int dbPort,
+            string sslMode)
         {
+            DB_SERVER = dbServer;
+            DB_PORT = dbPort;
+            DB_USERNAME = dbUsername;
+            DB_PASSWORD = dbPassword;
+            DB_DATABASE = dbDatabase;
+            DB_SSLMODE = sslMode;
 
-            this.DB_SERVER = dbServer;
-            this.DB_PORT = dbPort;
-            this.DB_USERNAME = dbUsername;
-            this.DB_PASSWORD = dbPassword;
-            this.DB_DATABASE = dbDatabase;
-            this.DB_SSLMODE = sslMode;
-  
-            this.Connection = new MySqlConnection(string.Format("server={0};uid={1};pwd={2};database={3};port={4};SslMode={5}",
-                this.DB_SERVER,
-                this.DB_USERNAME,
-                this.DB_PASSWORD,
-                this.DB_DATABASE,
-                this.DB_PORT,
-                this.DB_SSLMODE));
+            Connection = new MySqlConnection(string.Format(
+                "server={0};uid={1};pwd={2};database={3};port={4};SslMode={5}",
+                DB_SERVER,
+                DB_USERNAME,
+                DB_PASSWORD,
+                DB_DATABASE,
+                DB_PORT,
+                DB_SSLMODE));
         }
 
-        public string Test(string message="ping")
+        public string Test(string message = "ping")
         {
             try
             {
-                this.Connection.Open();
-                var cmd=new MySqlCommand("SELECT now()",this.Connection);
+                Connection.Open();
+                var cmd = new MySqlCommand("SELECT now()", Connection);
                 cmd.ExecuteNonQuery();
-                this.Connection.Close();
+                Connection.Close();
                 return message;
             }
             catch (Exception ex)
@@ -71,7 +68,5 @@ namespace alpha69.common
                 return $"failed: {ex.Message}";
             }
         }
-
-
     }
 }

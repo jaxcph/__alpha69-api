@@ -1,19 +1,16 @@
-﻿
-using alpha69.common;
-
+﻿using alpha69.common;
 
 namespace users_purchase
 {
-    public class Response:ResponseBase
+    public class Response : ResponseBase
     {
-
-        public ResponseBody Body { get; set; }
         public Response()
         {
             Message = "";
             Details = "";
         }
 
+        public ResponseBody Body { get; set; }
     }
 
     public class ResponseBody
@@ -23,6 +20,5 @@ namespace users_purchase
         public int ProductId { get; set; }
         public int PurchaseId { get; set; }
         public double Balance { get; set; }
-
     }
 }

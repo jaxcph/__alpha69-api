@@ -1,23 +1,24 @@
 
 {
-    "Information" : [
-        "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
-        "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
-        "dotnet lambda help",
-        "All the command line options for the Lambda command can be specified in this file."
-    ],
-    "profile"     : "default",
-    "region"      : "eu-central-1",
-    "configuration" : "Release",
-    "framework"     : "netcoreapp2.0",
-    "function-runtime" : "dotnetcore2.0",
-    "function-memory-size" : 256,
-    "function-timeout"     : 30,
-    "function-handler"     : "livesessions_goals_get::livesessions_goals_get.Function::FunctionHandler",
-    "environment-variables" : "\"DB_SERVER\"=\"alpha69.cfuzrlbo4jgs.eu-central-1.rds.amazonaws.com\";\"DB_DATABASE\"=\"alpha69\";\"DB_USERNAME\"=\"dbadmin\";\"DB_PASSWORD\"=\"fPA4Y9iZK15Tn1kw\";\"DB_PORT\"=\"3306\";\"DB_SSLMODE\"=\"required\";\"LOGLEVEL\"=\"DEBUG\"",
-    "function-name"         : "livesessions_goals_get",
-    "function-role"         : "arn:aws:iam::062476299766:role/lambda-vpc-execution-role",
-    "function-subnets"      : "subnet-0f967da0db590c9de,subnet-04c58422fdc6a75b2,subnet-0ab019f5857999ef8",
-    "function-security-groups" : "sg-01d3b911e9c94724b",
-    "tracing-mode"             : "PassThrough"
+  "Information": [
+    "This file provides default values for the deployment wizard inside Visual Studio and the AWS Lambda commands added to the .NET Core CLI.",
+    "To learn more about the Lambda commands with the .NET Core CLI execute the following command at the command line in the project root directory.",
+    "dotnet lambda help",
+    "All the command line options for the Lambda command can be specified in this file."
+  ],
+  "profile": "default",
+  "region": "eu-central-1",
+  "configuration": "Release",
+  "framework": "netcoreapp2.0",
+  "function-runtime": "dotnetcore2.0",
+  "function-memory-size": 256,
+  "function-timeout": 30,
+  "function-handler": "livesessions_goals_get::livesessions_goals_get.Function::FunctionHandler",
+  "environment-variables":
+    "\"DB_SERVER\"=\"alpha69.cfuzrlbo4jgs.eu-central-1.rds.amazonaws.com\";\"DB_DATABASE\"=\"alpha69\";\"DB_USERNAME\"=\"dbadmin\";\"DB_PASSWORD\"=\"fPA4Y9iZK15Tn1kw\";\"DB_PORT\"=\"3306\";\"DB_SSLMODE\"=\"required\";\"LOGLEVEL\"=\"DEBUG\"",
+  "function-name": "livesessions_goals_get",
+  "function-role": "arn:aws:iam::062476299766:role/lambda-vpc-execution-role",
+  "function-subnets": "subnet-0f967da0db590c9de,subnet-04c58422fdc6a75b2,subnet-0ab019f5857999ef8",
+  "function-security-groups": "sg-01d3b911e9c94724b",
+  "tracing-mode": "PassThrough"
 }
