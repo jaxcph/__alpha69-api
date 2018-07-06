@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
+    <AssemblyName>livesessions_goals_get</AssemblyName>
+    <RootNamespace>livesessions_goals_get</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

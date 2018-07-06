@@ -94,11 +94,14 @@ namespace users_purchase
                 {
                     StatusCode=200,
                     Message="ok",
-                    UserId = user.Id,
-                    WalletId = wallet.Id,
-                    PurchaseId = purchase.Id,
-                    ProductId=wallet.ProductId,
-                    Balance=wallet.Balance
+                    Body=new ResponseBody()
+                    { 
+                        UserId = user.Id,
+                        WalletId = wallet.Id,
+                        PurchaseId = purchase.Id,
+                        ProductId=wallet.ProductId,
+                        Balance=wallet.Balance
+                    }
                 };
 
                 return resp;

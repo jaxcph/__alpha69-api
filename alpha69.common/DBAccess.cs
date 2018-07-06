@@ -56,7 +56,7 @@ namespace alpha69.common
                 this.DB_SSLMODE));
         }
 
-        public string Test()
+        public string Test(string message="ping")
         {
             try
             {
@@ -64,7 +64,7 @@ namespace alpha69.common
                 var cmd=new MySqlCommand("SELECT now()",this.Connection);
                 cmd.ExecuteNonQuery();
                 this.Connection.Close();
-                return "ok";
+                return message;
             }
             catch (Exception ex)
             {

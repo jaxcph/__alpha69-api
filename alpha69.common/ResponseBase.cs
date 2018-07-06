@@ -7,7 +7,7 @@ namespace alpha69.common
     {
         public int StatusCode { get; set; }
         public string Message { get; set; }
-        public string ErrorDetails { get; set; }
+        public string Details { get; set; }
 
  
         public ResponseBase()
@@ -26,7 +26,7 @@ namespace alpha69.common
         {
             StatusCode = statusCode;
             Message = e.Message;
-            ErrorDetails = e.ToString();
+            Details = e.ToString();
      
         }
 

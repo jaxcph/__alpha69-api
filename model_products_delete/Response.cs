@@ -8,7 +8,7 @@ namespace models_products_delete
         public Response()
         {
             Message = "";
-            ErrorDetails = "";
+            Details = "";
         }
 
     }

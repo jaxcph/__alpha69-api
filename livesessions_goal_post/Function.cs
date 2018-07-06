@@ -43,7 +43,7 @@ namespace livesessions_goal_post
 
 
                 //get model
-                var model = Model.LoadByUser(user.Id, dba.Connection);
+                var model = Model.LoadByUser(user.Id,true, dba.Connection);
                 if (model == null)
                     return new Response() { StatusCode = 404, Message = "User is not registered as a model, so cannot create a live session" };
 
@@ -52,13 +52,32 @@ namespace livesessions_goal_post
                 if(ls==null)
                     return new Response() { StatusCode = 404, Message = "The model is not host of an open live session" };
 
+                //check if model is host of session
+                if (ls.Id != input.Body.LiveSessionId)
+                    return new Response(){ StatusCode = 404, Message = "Inconsistance between provided live session id and one registered in the db"};
+
+                //chekc if model is accepting product set for the goal
+                Product usedProduct = null;
+                foreach (var p in model.Products)
+                {
+                    if (p.Id == input.Body.ProductId)
+                    {
+                        usedProduct = p;
+                        break;
+                    }
+                }
+                if(usedProduct==null)
+                    return new Response() { StatusCode = 404, Message = $"The goal product is not accepted by this model" };
+
                 var goal=new Goal()
                 {
                     LiveSessionId = ls.Id,
                     Title =input.Body.Title,
-                    Description = input.Body.Title,
+                    Description = input.Body.Description,
+                    Tags = input.Body.Tags,
                     GoalAmount = input.Body.GoalAmount,
-                    GoalAmountLeft = 0
+                    GoalAmountLeft = input.Body.GoalAmount,
+                    ProductId = usedProduct.Id
                 };
                 goal.Save(dba.Connection);
 
@@ -67,11 +86,14 @@ namespace livesessions_goal_post
                 {
                     StatusCode = 200,
                     Message = "ok",
-
-                    HostModelId = model.Id,
-                    HostUserId = user.Id,
-                    LiveSessionId = ls.Id,
-                    GoalId=goal.Id
+                    Body=new ResponseBody()
+                    { 
+                        HostModelId = model.Id,
+                        HostUserId = user.Id,
+                        LiveSessionId = ls.Id,
+                        ProductId = usedProduct.Id,
+                        GoalId=goal.Id
+                    }
                 };
                 return r;
 

@@ -18,6 +18,7 @@ namespace livesessions_goal_post
 
         public string Title { get; set; }
         public string Description  { get; set; }
+        public int ProductId { get; set; }
         public double GoalAmount { get; set; }
         public string Tags { get; set; }
 

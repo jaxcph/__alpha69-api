@@ -43,7 +43,7 @@ namespace livesessions_delete
 
 
                 //get model
-                var model = Model.LoadByUser(user.Id, dba.Connection);
+                var model = Model.LoadByUser(user.Id,false, dba.Connection);
                 if (model == null)
                     return new Response() { StatusCode = 404, Message = "User is not registered as a model, so cannot create a live session" };
 

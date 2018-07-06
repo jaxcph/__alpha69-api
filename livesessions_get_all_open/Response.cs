@@ -6,14 +6,20 @@ namespace livesessions_get_all_open
     public class Response:ResponseBase        
     {
 
-        public int Count { get; set; }
-        public LiveSession[] Items { get; set; }
+        public ResponseBody Body { get; set; }
 
         public Response()
         {
             Message = "";
-            ErrorDetails = "";
+            Details = "";
         }
 
+
+    }
+
+    public class ResponseBody
+    {
+        public int Count { get; set; }
+        public LiveSession[] LiveSessions { get; set; }
     }
 }

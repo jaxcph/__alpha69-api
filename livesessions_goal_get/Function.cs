@@ -9,7 +9,7 @@ using Amazon.Lambda.Core;
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 
-namespace livesessions_get_all_open
+namespace livesessions_goals_get
 {
     public class Function
     {
@@ -29,19 +29,27 @@ namespace livesessions_get_all_open
 
             try
             {
-                var list = LiveSession.LoadOpenAll(dba.Connection);
+
+                //get user
+                var user = User.LoadBySourceUser(input.SourceUser, dba.Connection);
+                if (user == null) //does not exist
+                    return new Response() { StatusCode = 404, Message = "User is not registered" };
                 
+                 
+                var list=Goal.LoadOpenByLiveSession(input.Body.LiveSessionId,dba.Connection);
                 
+
                 var r = new Response()
                 {
                     StatusCode = 200,
                     Message = "ok",
-                    Body=new ResponseBody()
-                    { 
-                        LiveSessions = list.ToArray(),
-                        Count = list.Count
+                    Body = new ResponseBody()
+                    {
+                        Count = list.Count,
+                        Goals = list.ToArray()
                     }
                 };
+
                 return r;
 
 

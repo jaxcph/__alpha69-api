@@ -8,7 +8,7 @@ namespace models_products_post
         public Response()
         {
             Message = "";
-            ErrorDetails = "";
+            Details = "";
         }
 
     }

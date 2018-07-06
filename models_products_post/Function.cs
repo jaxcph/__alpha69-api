@@ -34,11 +34,28 @@ namespace models_products_post
                 if (!input.SourceUser.HasRole("Model"))
                     return new Response { StatusCode = 401, Message = "Access denied, requires Model role" };
 
+                
+                //get user
+                var user = User.LoadBySourceUser(input.SourceUser, dba.Connection);
+                if (user == null) 
+                    return new Response() { StatusCode = 404, Message = "User is not registered, hence cannot be a model" };
 
 
+                //get model
+                var model = Model.LoadByUser(user.Id, false,dba.Connection);
+                if (model == null)
+                    return new Response() { StatusCode = 404, Message = "User is not registered as a model, so cannot create a live session" };
+
+
+                //check that the user is also  the model 
+                if(model.Id!=input.Body.ModelId)
+                    return new Response() { StatusCode = 404, Message = "This model does not match the model id provided in the request" };
+
+
+                //create product
                 var modelProduct = new ModelProduct
                 {
-                    ModelId = input.Body.ModelId,
+                    ModelId = model.Id,
                     ProductId = input.Body.ProductId
                 };
                 modelProduct.Save(dba.Connection);

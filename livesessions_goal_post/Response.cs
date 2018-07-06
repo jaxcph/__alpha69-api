@@ -5,16 +5,22 @@ namespace livesessions_goal_post
     public class Response:ResponseBase        
     {
 
-        public int LiveSessionId { get; set; }
-        public int HostModelId { get; set; }
-        public int HostUserId { get; set; }
-        public int GoalId { get; set; }
+        public ResponseBody Body { get; set; }
 
         public Response()
         {
             Message = "";
-            ErrorDetails = "";
+            Details = "";
         }
 
+    }
+
+    public class ResponseBody
+    {
+        public int LiveSessionId { get; set; }
+        public int HostModelId { get; set; }
+        public int HostUserId { get; set; }
+        public int ProductId { get; set; }
+        public int GoalId { get; set; }
     }
 }

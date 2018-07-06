@@ -46,9 +46,17 @@ namespace models_post
                     user.Save(dba.Connection);
                 }
 
-                var modelExisting = Model.LoadByUser(user.Id, dba.Connection);
+                var modelExisting = Model.LoadByUser(user.Id,false, dba.Connection);
                 if (modelExisting != null)
-                    return new Response() { StatusCode = 409, Message = "Already exists", ModelId = modelExisting.Id };
+                    return new Response()
+                    {
+                        StatusCode = 409,
+                        Message = "Already exists",
+                        Body = new ResponseBody()
+                        {
+                            ModelId = modelExisting.Id
+                        }
+                    };
 
                 var model = new Model
                 {
@@ -68,7 +76,9 @@ namespace models_post
                 {
                     StatusCode = 200,
                     Message = "ok",
-                    ModelId = model.Id
+                    Body = new ResponseBody() { 
+                        ModelId = model.Id
+                    }
                 };
                 return r;
 

@@ -1,7 +1,16 @@
 {
-  "body": {
-    "IsPing": false,
-    "ModelId": 45,
-    "ProductId": 500
+  
+    "SourceUser": {
+      "Id": "555",
+      "Domain": "joeykim.tv",
+      "Login": "missselena",
+      "Roles": "Member, Model",
+      "IPAddress": "2.2.2.2",
+      "UserScore": 100
+    },
+    "Body": {
+      "IsPing": false,
+      "ModelId": 51,
+      "ProductId": 100
+    }
   }
-}

@@ -69,20 +69,26 @@ namespace alpha69.common.dto
                 return null;
         }
 
-        public static Model LoadByUser(int userId, MySqlConnection conn)
+        public static Model LoadByUser(int userId, bool includeProducts, MySqlConnection conn)
         {
             var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE user_id={userId}", conn);
             var ds = new DataSet("models");
             da.Fill(ds);
 
             if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
+            {
+                var item=new Model(ds.Tables[0].Rows[0]);
+                if(includeProducts)
+                    item._products = Product.LoadForModel(item.Id, conn).ToArray();
+
+                return item;
+            }
             else
                 return null;
         }
 
 
-        public static Model LoadByName(string name, MySqlConnection conn)
+        public static Model LoadByName(string name, bool includeProducts, MySqlConnection conn)
         {
             var da = new MySqlDataAdapter($"SELECT id,user_id,name,description,website,facebook,twitter,instagram,snapchat, created_at FROM models WHERE name=@name", conn);
             da.SelectCommand.Parameters.Add("@name",MySqlDbType.VarChar);
@@ -92,7 +98,13 @@ namespace alpha69.common.dto
             da.Fill(ds);
 
             if (ds.Tables[0].Rows.Count == 1)
-                return new Model(ds.Tables[0].Rows[0]);
+            {
+                var item = new Model(ds.Tables[0].Rows[0]);
+                if (includeProducts)
+                    item._products = Product.LoadForModel(item.Id, conn).ToArray();
+
+                return item;
+            }
             else
                 return null;
         }

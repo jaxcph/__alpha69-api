@@ -40,7 +40,7 @@ namespace livesessions_post
 
 
                 //get model
-                var model = Model.LoadByUser(user.Id, dba.Connection);
+                var model = Model.LoadByUser(user.Id,false, dba.Connection);
                 if (model == null)
                     return new Response() { StatusCode = 404, Message = "User is not registered as a model, so cannot create a live session" };
 
@@ -65,9 +65,12 @@ namespace livesessions_post
                 {
                     StatusCode = 200,
                     Message = "ok",
-                    HostModelId = model.Id,
-                    HostUserId=user.Id,
-                    LiveSessionId = ls.Id
+                    Body = new ResponseBody()
+                    { 
+                        HostModelId = model.Id,
+                        HostUserId=user.Id,
+                        LiveSessionId = ls.Id
+                    }
                 };
                 return r;
 

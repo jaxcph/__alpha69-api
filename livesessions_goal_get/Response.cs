@@ -1,6 +1,8 @@
-﻿using alpha69.common;
+﻿using System.Reflection.Metadata.Ecma335;
+using alpha69.common;
+using alpha69.common.dto;
 
-namespace models_post
+namespace livesessions_goals_get
 {
     public class Response:ResponseBase        
     {
@@ -17,6 +19,7 @@ namespace models_post
 
     public class ResponseBody
     {
-        public int ModelId { get; set; }
+        public int Count { get; set; }
+        public Goal[] Goals { get; set; }
     }
 }

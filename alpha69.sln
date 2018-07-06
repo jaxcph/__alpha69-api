@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json test", "json test", "{1E7CC67C-A888-46BA-A595-1146044CF245}"
 	ProjectSection(SolutionItems) = preProject
 		live_session_post.json = live_session_post.json
+		livesession_goal_post.json = livesession_goal_post.json
+		livesession_goals_get.json = livesession_goals_get.json
 		livesessions_delete.json = livesessions_delete.json
 		models_post.json = models_post.json
 		models_products_delete.json = models_products_delete.json
@@ -64,6 +66,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "website_sim", "website_sim\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "livesessions_goal_post", "livesessions_goal_post\livesessions_goal_post.csproj", "{9229BC80-3D87-4F87-A037-55F9179356D5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "livesessions_goals_get", "livesessions_goal_get\livesessions_goals_get.csproj", "{707506F4-63F1-4FE8-98D1-991F2203AE81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,6 +114,10 @@ Global
 		{9229BC80-3D87-4F87-A037-55F9179356D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9229BC80-3D87-4F87-A037-55F9179356D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9229BC80-3D87-4F87-A037-55F9179356D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{707506F4-63F1-4FE8-98D1-991F2203AE81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{707506F4-63F1-4FE8-98D1-991F2203AE81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{707506F4-63F1-4FE8-98D1-991F2203AE81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{707506F4-63F1-4FE8-98D1-991F2203AE81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
