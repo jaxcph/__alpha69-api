@@ -25,6 +25,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F08323C8-92BE-4969-AEC1-3509FE3B0B05}"
 	ProjectSection(SolutionItems) = preProject
 		alpha69.sql = alpha69.sql
+		CHANGELOG.md = CHANGELOG.md
 		NOTES.txt = NOTES.txt
 		smartami_phpmyadmin2.pem = smartami_phpmyadmin2.pem
 	EndProjectSection
